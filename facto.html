@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: beige;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 100px;
+            border: 2px solid black;
+            border-radius: 15px;
+            gap: 20px;
+        }
+        .impresion{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="text" id="numeroIngresado" placeholder="ingrese un numero" min="1">
+        <button onclick="calcular()">CALCULAR</button>
+
+        <div class="impresion">
+            Multiplicacion : <label id="printM"></label>
+            Resultado : <label id="printR"></label>
+        </div>
+    </div>
+    <script>
+        function calcular() {
+            let inputNumber = document.getElementById("numeroIngresado").value;
+            let number = parseInt(inputNumber);
+
+            if (isNaN(number) || number <= 0) {
+                document.getElementById("numeroIngresado").style.border = "2px solid red"
+                document.getElementById("numeroIngresado").focus();
+                Swal.fire({
+                    title: "Hay un error",
+                    text: "El valor ingresado no es valido, por favor ingrese un numero positivo mayor o igual que 1",
+                    icon: "error"
+                });
+            } else {
+                document.getElementById("numeroIngresado").style.border = "2px solid green"
+            }
+            let accu = 1;
+            let progress="";
+            for (let i = number; i > 1; i--) {
+                let numberPrevious = accu;
+                accu *= i;
+                progress += numberPrevious + " * " + i + " = " + accu + "\n";
+            }
+            document.getElementById("printM").innerText = progress;
+            document.getElementById("printR").innerText = accu;
+
+
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

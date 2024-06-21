@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <label for="Numero">INGRESE UN NUMERO</label>
+        <input type="text" id="numeroi" name="numero">
+
+        <button onclick="calcularFibo()">FIBONACCI</button>
+
+        <div class="resultados">
+            Proceso: <label id="printProcess"></label>
+            Pares: <label id="printPares"></label>
+            Impares:  <label id="printImpares"></label>
+        </div>
+    </div>
+
+    <script>
+        function calcularFibo(){
+
+            let number= document.getElementById("numeroi").value;
+            let num = parseInt(number);
+    
+            if(isNaN(num)|| num <=0 ){
+                document.getElementById("numeroi").style.border="2px solid red";
+                document.getElementById("numeroi").focus();
+                
+                Swal.fire({
+                    title: "Hay un error",
+                    text: "La caja esta vacia o el valor ingresado no es valido, por favor ingresar un numero entero",
+                    icon: "error"
+                });
+            }else{
+    
+                document.getElementById("numeroi").style.border="2px solid green";
+                document.getElementById("numeroi").focus();
+    
+                let n = document.getElementById("numeroi").value;
+                let n1 = 0;
+                let n2=1;
+                let n3=0;
+    
+                let resultado="";
+                let pares = "";
+                let impares = "";
+    
+                for(let i = 1;i<=n; i++){
+                    n1=n2;
+                    n2=n3;
+                    n3=n1+n2;
+                    resultado+= n1+ "+"+ n2+ "="+n3+ "\n";
+                    if(n3%2==0){
+                        pares++;
+                        // pares += n3 + ", ";
+                    }else{
+                        impares++;
+                        // impares += n3 + ", ";
+                    }
+                    
+                }
+                document.getElementById("printProcess").innerText=resultado;
+                document.getElementById("printPares").innerText= "\n"+pares;
+                document.getElementById("printImpares").innerText= "\n"+impares;
+    
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contenedor {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 400px;
+            width: 400px;
+            border: 2px solid gray;
+            border-radius: 20px;
+            gap: 10px;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+
+        <div class="form">
+            <label for="nombre">INGRESA TU NOMBRE</label>
+            <input type="text" id="nameInput" name="nombre">
+        </div>
+        <div class="form">
+            <label for="nombre">INGRESA TU APELLIDO</label>
+            <input type="text" id="lastNameInput" name="apellido">
+        </div>
+
+        <button onclick="processName()">CALCULAR</button>
+
+        <div id="nameCompleted"></div>
+        <div id="cantidad"></div>
+        <div id="tablas"></div>
+    </div>
+
+    <script>
+        function processName() {
+            let name = document.getElementById("nameInput").value.trim();
+            let lastName = document.getElementById("lastNameInput").value.trim();
+
+            if (name.length < 3 || name.length == 0 ) {
+
+                Swal.fire({
+                    title: "Hay un error",
+                    text: "Algunas cajas de textos estan vacias",
+                    icon: "error"
+                });
+                document.getElementById("nameInput").style.border = "2px solid red"
+
+                
+                if(lastName.length < 5 || lastName.length == 0){
+                    document.getElementById("lastNameInput").style.border = "2px solid red"
+                }else{
+                    document.getElementById("lastNameInput").style.border = "2px solid green"
+
+                }
+
+
+            } else {
+                document.getElementById("nameInput").style.border = "2px solid green"
+
+
+                let nameFull = "";
+                nameFull = name + "" + lastName;
+
+                document.getElementById("nameCompleted").innerText = name + " " + lastName;
+                document.getElementById("cantidad").innerText = nameFull.length;
+
+                let n = 1;
+                let valor = "";
+                let resultado = "";
+
+                for (let i = 1; i <= 10; i++) {
+                    n = nameFull.length;
+                    valor = n * i;
+                    resultado += n + " * " + i + " = " + valor + "\n";
+                }
+                document.getElementById("tablas").innerText = resultado;
+
+                
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</body>
+
+</html>
